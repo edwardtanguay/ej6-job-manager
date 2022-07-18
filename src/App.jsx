@@ -103,11 +103,11 @@ function App() {
 				<h1>EJ2 Job Manager</h1>
 
 				<nav>
-					<NavLink to="/welcome">Welcome</NavLink> |{' '}
-					<NavLink to="/job-sources">Job Sources</NavLink> |{' '}
-					<NavLink to="/job-applications">Job Applications</NavLink> |{' '}
-					<NavLink to="/cv">CV</NavLink> |{' '}
-					<NavLink to="/login">Login</NavLink> |{' '}
+					<NavLink to="/welcome">Welcome</NavLink>
+					<NavLink to="/job-sources">Job Sources</NavLink> 
+					<NavLink to="/job-applications">Job Applications</NavLink>
+					<NavLink to="/cv">CV</NavLink>
+					<NavLink to="/login">Login</NavLink> 
 					<NavLink to="/register">Register</NavLink>
 				</nav>
 

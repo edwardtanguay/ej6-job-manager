@@ -1,7 +1,7 @@
 export const PageJobApplications = () => {
 	return (
 		<>
-			<h2>Job Applications</h2>
+	<p>This is the Job Application page.</p>	
 		</>
 	);
 };

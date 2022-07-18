@@ -1,7 +1,7 @@
 export const PageRegister = () => {
 	return (
 		<>
-			<h2>Register</h2>
+		 <p>This is the Register page.</p>
 		</>
 	);
 };

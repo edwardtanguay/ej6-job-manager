@@ -14,13 +14,19 @@ body {
 		margin: 0;
 	}
 
-	a {
-		color: #aaa;
-		text-decoration: none;
-	}
+	nav {
+		a {
+			color: #aaa;
+			text-decoration: none;
+		}
+		a:not(:last-of-type)::after {
+			color: #444;
+			content: ' | ';
+		}
 
-	a.active {
-		color: yellow;
+		a.active {
+			color: yellow;
+		}
 	}
 }
 
