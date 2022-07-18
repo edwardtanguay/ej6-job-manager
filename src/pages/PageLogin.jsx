@@ -2,14 +2,6 @@ export const PageLogin = ({message, jobSources, userIsLoggedIn, currentUser, cur
 	return (
 		<>
 			<p>This is the Login page.</p>
-			<div className="loggedInInfo">
-				{userIsLoggedIn() && (
-					<div>
-						Logged in: {currentUser.firstName}{' '}
-						{currentUser.lastName}
-					</div>
-				)}
-			</div>
 			<div className="info">
 				{currentUserIsInAccessGroup('administrators') && (
 					<div>info for administrators</div>

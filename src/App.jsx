@@ -13,7 +13,9 @@ const backend_base_url = 'http://localhost:3045';
 
 function App() {
 	const [jobSources, setJobSources] = useState([]);
-	const [currentUser, setCurrentUser] = useState({});
+	const [currentUser, setCurrentUser] = useState({
+		username: 'anonymousUser',
+	});
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [message, setMessage] = useState('');
@@ -67,7 +69,7 @@ function App() {
 					setCurrentUser(data.user);
 					localStorage.setItem('token', data.token);
 				} else {
-					setMessage('bad login');
+					setMessage('');
 				}
 			}
 		})();
@@ -102,24 +104,62 @@ function App() {
 			<>
 				<h1>EJ2 Job Manager</h1>
 
+				{userIsLoggedIn() && (
+					<div className="loggedInInfo">
+						{currentUser.firstName} {currentUser.lastName} <button className="logout" onClick={handleLogoutButton}>
+				Logout
+			</button>
+					</div>
+				)}
 				<nav>
 					<NavLink to="/welcome">Welcome</NavLink>
-					<NavLink to="/job-sources">Job Sources</NavLink> 
+					<NavLink to="/job-sources">Job Sources</NavLink>
 					<NavLink to="/job-applications">Job Applications</NavLink>
 					<NavLink to="/cv">CV</NavLink>
-					<NavLink to="/login">Login</NavLink> 
+					<NavLink to="/login">Login</NavLink>
 					<NavLink to="/register">Register</NavLink>
 				</nav>
 
 				<Routes>
-					<Route path="/welcome" element={<PageWelcome handleLogoutButton={handleLogoutButton} />} />
-					<Route path="/job-sources" element={<PageJobSources jobSources={jobSources} />} />
-					<Route path="/job-applications" element={<PageJobApplications />} />
+					<Route
+						path="/welcome"
+						element={
+							<PageWelcome
+								handleLogoutButton={handleLogoutButton}
+							/>
+						}
+					/>
+					<Route
+						path="/job-sources"
+						element={<PageJobSources jobSources={jobSources} />}
+					/>
+					<Route
+						path="/job-applications"
+						element={<PageJobApplications />}
+					/>
 					<Route path="/cv" element={<PageCv />} />
-					<Route path="/login" element={<PageLogin message={message} jobSources={jobSources} userIsLoggedIn={userIsLoggedIn} currentUser={currentUser} currentUserIsInAccessGroup={currentUserIsInAccessGroup} handleLogoutButton={handleLogoutButton} handleLoginButton={handleLoginButton} username={username} password={password} setUsername={setUsername} setPassword={setPassword}/>} />
+					<Route
+						path="/login"
+						element={
+							<PageLogin
+								message={message}
+								jobSources={jobSources}
+								userIsLoggedIn={userIsLoggedIn}
+								currentUser={currentUser}
+								currentUserIsInAccessGroup={
+									currentUserIsInAccessGroup
+								}
+								handleLogoutButton={handleLogoutButton}
+								handleLoginButton={handleLoginButton}
+								username={username}
+								password={password}
+								setUsername={setUsername}
+								setPassword={setPassword}
+							/>
+						}
+					/>
 					<Route path="/register" element={<PageRegister />} />
 				</Routes>
-
 			</>
 		</div>
 	);
