@@ -23,7 +23,6 @@ function App() {
 
 	const userIsLoggedIn = () => {
 		return currentUser.username !== 'anonymousUser';
-		// return Object.keys(currentUser).length > 0;
 	};
 
 	const currentUserIsInAccessGroups = (accessGroups) => {
@@ -97,6 +96,9 @@ function App() {
 			localStorage.setItem('token', data.token);
 		} else {
 			setMessage('bad login');
+			setTimeout(() => {
+				setMessage('');
+			}, 3000);
 		}
 	};
 
@@ -138,15 +140,15 @@ function App() {
 						'administrators',
 						'companies',
 					]) && <NavLink to="/cv">CV</NavLink>}
-					{currentUserIsInAccessGroups([
-						'loggedOutUsers',
-					]) && (
-							<>
-								<NavLink to="/login">Login</NavLink>
-								<NavLink to="/register">Register</NavLink>
-							</>
-						)}
+					{currentUserIsInAccessGroups(['loggedOutUsers']) && (
+						<>
+							<NavLink to="/login">Login</NavLink>
+							<NavLink to="/register">Register</NavLink>
+						</>
+					)}
 				</nav>
+
+				{message !== '' && <div className="siteMessage">{message}</div>}
 
 				<Routes>
 					<Route

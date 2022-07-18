@@ -21,11 +21,20 @@ body {
 		margin-bottom: 5px;
 	}
 
+	.siteMessage {
+		background-color: #444;
+		color: tomato;
+		padding: 5px;
+		border-radius: 5px;
+		margin-top: 5px;
+	}
+
 	nav {
 		a {
 			color: #aaa;
 			text-decoration: none;
 		}
+
 		a:not(:last-of-type)::after {
 			color: #444;
 			content: ' | ';

@@ -23,7 +23,6 @@ export const PageLogin = ({message, jobSources, userIsLoggedIn, currentUser, cur
 					<div className="row">
 						<button>Login</button>
 					</div>
-					<div className="row">{message}</div>
 				</form>
 			)}
 		</>
