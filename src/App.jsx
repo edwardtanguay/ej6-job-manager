@@ -112,7 +112,7 @@ function App() {
 				</nav>
 
 				<Routes>
-					<Route path="/welcome" element={<PageWelcome />} />
+					<Route path="/welcome" element={<PageWelcome handleLogoutButton={handleLogoutButton} />} />
 					<Route path="/job-sources" element={<PageJobSources />} />
 					<Route path="/job-applications" element={<PageJobApplications />} />
 					<Route path="/cv" element={<PageCv />} />

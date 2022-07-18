@@ -26,9 +26,6 @@ export const PageLogin = ({message, jobSources, userIsLoggedIn, currentUser, cur
 							return <li key={i}>{jobSource.name}</li>;
 						})}
 					</ul>
-					<button className="logout" onClick={handleLogoutButton}>
-						Logout
-					</button>
 				</>
 			) : (
 				<form className="login" onSubmit={handleLoginButton}>
