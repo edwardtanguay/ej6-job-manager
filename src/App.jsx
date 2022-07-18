@@ -113,7 +113,7 @@ function App() {
 
 				<Routes>
 					<Route path="/welcome" element={<PageWelcome handleLogoutButton={handleLogoutButton} />} />
-					<Route path="/job-sources" element={<PageJobSources />} />
+					<Route path="/job-sources" element={<PageJobSources jobSources={jobSources} />} />
 					<Route path="/job-applications" element={<PageJobApplications />} />
 					<Route path="/cv" element={<PageCv />} />
 					<Route path="/login" element={<PageLogin message={message} jobSources={jobSources} userIsLoggedIn={userIsLoggedIn} currentUser={currentUser} currentUserIsInAccessGroup={currentUserIsInAccessGroup} handleLogoutButton={handleLogoutButton} handleLoginButton={handleLoginButton} username={username} password={password} setUsername={setUsername} setPassword={setPassword}/>} />

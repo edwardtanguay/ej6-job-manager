@@ -18,16 +18,7 @@ export const PageLogin = ({message, jobSources, userIsLoggedIn, currentUser, cur
 					<div>new job information for job seekers</div>
 				)}
 			</div>
-			{userIsLoggedIn() ? (
-				<>
-					<p>There are {jobSources.length} job sources:</p>
-					<ul>
-						{jobSources.map((jobSource, i) => {
-							return <li key={i}>{jobSource.name}</li>;
-						})}
-					</ul>
-				</>
-			) : (
+			{!userIsLoggedIn() && (
 				<form className="login" onSubmit={handleLoginButton}>
 					<div className="row">
 						username:{' '}
