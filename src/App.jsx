@@ -15,6 +15,7 @@ function App() {
 	const [jobSources, setJobSources] = useState([]);
 	const [currentUser, setCurrentUser] = useState({
 		username: 'anonymousUser',
+		accessGroups: ['loggedOutUsers'],
 	});
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -25,12 +26,16 @@ function App() {
 		// return Object.keys(currentUser).length > 0;
 	};
 
-	const currentUserIsInAccessGroup = (accessGroup) => {
-		if (currentUser.accessGroups) {
-			return currentUser.accessGroups.includes(accessGroup);
-		} else {
-			return false;
-		}
+	const currentUserIsInAccessGroups = (accessGroups) => {
+		let rb = false;
+		accessGroups.forEach((accessGroup) => {
+			console.log(`checking ${accessGroup}`, currentUser.accessGroups);
+			console.log(currentUser.accessGroups.includes(accessGroup));
+			if (currentUser.accessGroups.includes(accessGroup)) {
+				rb = true;
+			}
+		});
+		return rb;
 	};
 
 	const getJobSources = () => {
@@ -61,6 +66,7 @@ function App() {
 					body: JSON.stringify({
 						username: 'anonymousUser',
 						password: 'anonymousUser123',
+						accessGroups: ['loggedOutUsers'],
 					}),
 				});
 				if (response.ok) {
@@ -96,7 +102,10 @@ function App() {
 
 	const handleLogoutButton = () => {
 		localStorage.removeItem('token');
-		setCurrentUser({ username: 'anonymousUser' });
+		setCurrentUser({
+			username: 'anonymousUser',
+			accessGroups: ['loggedOutUsers'],
+		});
 	};
 
 	return (
@@ -106,18 +115,37 @@ function App() {
 
 				{userIsLoggedIn() && (
 					<div className="loggedInInfo">
-						{currentUser.firstName} {currentUser.lastName} <button className="logout" onClick={handleLogoutButton}>
-				Logout
-			</button>
+						{currentUser.firstName} {currentUser.lastName}{' '}
+						<button className="logout" onClick={handleLogoutButton}>
+							Logout
+						</button>
 					</div>
 				)}
+
 				<nav>
 					<NavLink to="/welcome">Welcome</NavLink>
-					<NavLink to="/job-sources">Job Sources</NavLink>
-					<NavLink to="/job-applications">Job Applications</NavLink>
-					<NavLink to="/cv">CV</NavLink>
-					<NavLink to="/login">Login</NavLink>
-					<NavLink to="/register">Register</NavLink>
+
+					{currentUserIsInAccessGroups([
+						'jobSeekers',
+						'administrators',
+					]) && <NavLink to="/job-sources">Job Sources</NavLink>}
+					{currentUserIsInAccessGroups(['administrators']) && (
+						<NavLink to="/job-applications">
+							Job Applications
+						</NavLink>
+					)}
+					{currentUserIsInAccessGroups([
+						'administrators',
+						'companies',
+					]) && <NavLink to="/cv">CV</NavLink>}
+					{currentUserIsInAccessGroups([
+						'loggedOutUsers',
+					]) && (
+							<>
+								<NavLink to="/login">Login</NavLink>
+								<NavLink to="/register">Register</NavLink>
+							</>
+						)}
 				</nav>
 
 				<Routes>
@@ -146,8 +174,8 @@ function App() {
 								jobSources={jobSources}
 								userIsLoggedIn={userIsLoggedIn}
 								currentUser={currentUser}
-								currentUserIsInAccessGroup={
-									currentUserIsInAccessGroup
+								currentUserIsInAccessGroups={
+									currentUserIsInAccessGroups
 								}
 								handleLogoutButton={handleLogoutButton}
 								handleLoginButton={handleLoginButton}

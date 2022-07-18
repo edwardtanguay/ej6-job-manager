@@ -1,15 +1,7 @@
-export const PageLogin = ({message, jobSources, userIsLoggedIn, currentUser, currentUserIsInAccessGroup, handleLogoutButton, handleLoginButton, username, password, setUsername, setPassword}) => {
+export const PageLogin = ({message, jobSources, userIsLoggedIn, currentUser, currentUserIsInAccessGroups, handleLogoutButton, handleLoginButton, username, password, setUsername, setPassword}) => {
 	return (
 		<>
 			<p>This is the Login page.</p>
-			<div className="info">
-				{currentUserIsInAccessGroup('administrators') && (
-					<div>info for administrators</div>
-				)}
-				{currentUserIsInAccessGroup('jobSeekers') && (
-					<div>new job information for job seekers</div>
-				)}
-			</div>
 			{!userIsLoggedIn() && (
 				<form className="login" onSubmit={handleLoginButton}>
 					<div className="row">
